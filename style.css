@@ -514,6 +514,14 @@ footer {
 .btn-download i {
   margin-right: 8px;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  margin: 0;
+}
 
 
 
