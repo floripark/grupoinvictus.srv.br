@@ -285,20 +285,31 @@ section {
 /* CONTATO */
 /* ============================= */
 
+.contact {
+  text-align: center;
+}
+
 .contact form {
   max-width: 600px;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: stretch; /* força largura total */
 }
 
 .contact input,
 .contact textarea {
+  width: 100%; /* garante alinhamento */
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
   border: 1px solid #ddd;
   transition: 0.3s;
+  font-size: 16px;
+}
+
+.contact textarea {
+  resize: vertical; /* impede distorção lateral */
 }
 
 .contact input:focus,
@@ -308,6 +319,8 @@ section {
 }
 
 .contact button {
+  align-self: center; /* centraliza botão */
+  width: 200px;
   padding: 1rem;
   border: none;
   border-radius: 50px;
@@ -320,7 +333,7 @@ section {
 
 .contact button:hover {
   background: #ff8c42;
-  transform: scale(1.05);
+  transform: translateY(-3px);
 }
 
 .whatsapp-float {
@@ -485,4 +498,5 @@ footer {
 .btn-download i {
   margin-right: 8px;
 }
+
 
