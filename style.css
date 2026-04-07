@@ -595,3 +595,17 @@ footer {
   transform: translateY(-3px);
 }
 
+.btn-vagas {
+  display: inline-block;
+  background: #0a2540;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-vagas:hover {
+  background: #163a63;
+  transform: translateY(-2px);
+}
