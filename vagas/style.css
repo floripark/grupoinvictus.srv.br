@@ -1,24 +1,52 @@
+/* ============================= */
+/* PORTAL DE VAGAS */
+/* ============================= */
+
 .vagas {
-  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.vaga {
-  background: #ffffff;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+.vagas h3.section-title {
+  margin-top: 3rem;
+  font-size: 1.6rem;
 }
 
-.vaga h2 {
-  margin-bottom: 10px;
+/* GRID DE VAGAS */
+.vagas {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.vaga button {
-  background: #0a2540;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
+/* CARD DE VAGA */
+.vaga-card {
+  width: 100%;
+  padding: 2rem;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  transition: 0.3s;
+}
+
+.vaga-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.vaga-card h3 {
+  color: #ff6600;
+  margin-bottom: 0.5rem;
+}
+
+.vaga-card p {
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+/* BOTÃO */
+.btn-vaga {
+  margin-top: 1rem;
+  display: inline-block;
 }
