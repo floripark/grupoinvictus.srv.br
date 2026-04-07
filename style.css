@@ -523,5 +523,75 @@ footer {
   margin: 0;
 }
 
+/* ============================= */
+/* VAGA PCD */
+/* ============================= */
 
+.vaga-pcd {
+  text-align: center;
+  background: #fff;
+}
+
+.vaga-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 20px;
+  background: #fff7f0;
+  border: 2px solid #ff6600;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.vaga-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+}
+
+.vaga-card h3 {
+  color: #ff6600;
+  margin-bottom: 1rem;
+}
+
+.vaga-card p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.vaga-card ul {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.vaga-card ul li {
+  margin-bottom: 0.5rem;
+  font-size: 15px;
+}
+
+.email-envio {
+  font-weight: 600;
+  margin: 1.5rem 0;
+}
+
+.email-envio a {
+  color: #ff6600;
+  font-weight: bold;
+}
+
+.btn-vaga {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #ff6600;
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-vaga:hover {
+  background: #ff8c42;
+  transform: translateY(-3px);
+}
 
