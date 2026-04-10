@@ -17,76 +17,142 @@
 
     .contrato h3 {
       color: #ff6600;
-      margin-bottom: 15px;
     }
 
-    .contrato input, .contrato select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
+    .item {
+      margin: 8px 0;
+    }
+
+    .resumo {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 15px;
+      background: #fff7f0;
+      border: 2px solid #ff6600;
     }
   </style>
-
 </head>
 
 <body>
 
 <section>
-  <h2 class="section-title">Controle de Contratos</h2>
+  <h2 class="section-title">Resumo Geral da Empresa</h2>
+  <div id="resumo" class="resumo"></div>
 
+  <h2 class="section-title">Contratos</h2>
   <div id="conteudo"></div>
 </section>
 
 <script>
 
-// PROTEÇÃO
+// 🔐 PROTEÇÃO
 if (localStorage.getItem("acesso") !== "ok") {
   window.location.href = "intranet.html";
 }
 
-// CONTRATOS
-const contratos = [
-  "Copasa",
-  "GHC",
-  "Funai Norte Limpeza",
-  "Funai Norte Adm",
-  "Funai Xingu",
-  "Funai Médio Purus",
-  "Funai Alto Purus"
-];
+// 📊 DADOS (VOCÊ EDITA AQUI)
+const dados = {
+  "Copasa": {
+    nota: 15000,
+    paga: true,
+    pago: 15000,
+    folha: 8000,
+    beneficios: 2000,
+    fgts: 1200
+  },
+  "GHC": {
+    nota: 20000,
+    paga: false,
+    pago: 0,
+    folha: 9000,
+    beneficios: 2500,
+    fgts: 1500
+  },
+  "Funai Norte Limpeza": {
+    nota: 18000,
+    paga: true,
+    pago: 18000,
+    folha: 7000,
+    beneficios: 2200,
+    fgts: 1300
+  },
+  "Funai Norte Adm": {
+    nota: 12000,
+    paga: false,
+    pago: 0,
+    folha: 5000,
+    beneficios: 1500,
+    fgts: 900
+  },
+  "Funai Xingu": {
+    nota: 14000,
+    paga: true,
+    pago: 14000,
+    folha: 6000,
+    beneficios: 1800,
+    fgts: 1000
+  },
+  "Funai Médio Purus": {
+    nota: 16000,
+    paga: false,
+    pago: 0,
+    folha: 6500,
+    beneficios: 2000,
+    fgts: 1100
+  },
+  "Funai Alto Purus": {
+    nota: 17000,
+    paga: true,
+    pago: 17000,
+    folha: 7500,
+    beneficios: 2100,
+    fgts: 1200
+  }
+};
 
 const container = document.getElementById("conteudo");
+const resumo = document.getElementById("resumo");
 
-contratos.forEach(nome => {
+// 🔢 VARIÁVEIS DE SOMA
+let totalNota = 0;
+let totalPago = 0;
+let totalFolha = 0;
+let totalBeneficios = 0;
+let totalFgts = 0;
+
+// 📌 GERAR CONTRATOS
+for (let nome in dados) {
+  let d = dados[nome];
+
+  totalNota += d.nota;
+  totalPago += d.pago;
+  totalFolha += d.folha;
+  totalBeneficios += d.beneficios;
+  totalFgts += d.fgts;
+
   container.innerHTML += `
     <div class="contrato">
       <h3>${nome}</h3>
 
-      <label>Valor da Nota Fiscal</label>
-      <input type="number">
-
-      <label>Status da Nota</label>
-      <select>
-        <option>Não paga</option>
-        <option>Paga</option>
-      </select>
-
-      <label>Valor Pago</label>
-      <input type="number">
-
-      <label>Folha de Pagamento</label>
-      <input type="number">
-
-      <label>VA / VT</label>
-      <input type="number">
-
-      <label>FGTS</label>
-      <input type="number">
+      <div class="item"><strong>Valor da Nota:</strong> R$ ${d.nota}</div>
+      <div class="item"><strong>Status:</strong> ${d.paga ? "Paga" : "Não paga"}</div>
+      <div class="item"><strong>Valor Pago:</strong> R$ ${d.pago}</div>
+      <div class="item"><strong>Folha:</strong> R$ ${d.folha}</div>
+      <div class="item"><strong>VA/VT:</strong> R$ ${d.beneficios}</div>
+      <div class="item"><strong>FGTS:</strong> R$ ${d.fgts}</div>
     </div>
   `;
-});
+}
+
+// 📊 RESUMO GERAL
+resumo.innerHTML = `
+  <div class="item"><strong>Total de Notas:</strong> R$ ${totalNota}</div>
+  <div class="item"><strong>Total Recebido:</strong> R$ ${totalPago}</div>
+  <div class="item"><strong>Total Folha:</strong> R$ ${totalFolha}</div>
+  <div class="item"><strong>Total VA/VT:</strong> R$ ${totalBeneficios}</div>
+  <div class="item"><strong>Total FGTS:</strong> R$ ${totalFgts}</div>
+`;
 
 </script>
 
