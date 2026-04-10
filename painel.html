@@ -189,6 +189,83 @@ const dados = {
     folha: 9000, folhaPago: false,
     beneficios: 2500, beneficiosPago: false,
     fgts: 1500, fgtsPago: false
+  },
+
+  "Funai Norte Limpeza": {
+    nota: 18000, paga: true, pago: 18000,
+    folha: 7000, folhaPago: true,
+    beneficios: 2200, beneficiosPago: false,
+    fgts: 1300, fgtsPago: true
+  },
+
+  "Funai Norte Adm": {
+    nota: 12000, paga: false, pago: 0,
+    folha: 5000, folhaPago: false,
+    beneficios: 1500, beneficiosPago: false,
+    fgts: 900, fgtsPago: false
+  },
+
+  "Funai Xingu": {
+    nota: 14000, paga: true, pago: 14000,
+    folha: 6000, folhaPago: true,
+    beneficios: 1800, beneficiosPago: true,
+    fgts: 1000, fgtsPago: true
+  },
+
+  "Funai Médio Purus": {
+    nota: 16000, paga: false, pago: 0,
+    folha: 6500, folhaPago: false,
+    beneficios: 2000, beneficiosPago: false,
+    fgts: 1100, fgtsPago: false
+  },
+
+  "Funai Alto Purus": {
+    nota: 17000, paga: true, pago: 17000,
+    folha: 7500, folhaPago: true,
+    beneficios: 2100, beneficiosPago: true,
+    fgts: 1200, fgtsPago: true
+  },
+
+  "FUNAI DOURADOS": {
+    nota: 0, paga: false, pago: 0,
+    folha: 0, folhaPago: false,
+    beneficios: 0, beneficiosPago: false,
+    fgts: 0, fgtsPago: false
+  },
+
+  "FUNAI JURUÁ": {
+    nota: 0, paga: false, pago: 0,
+    folha: 0, folhaPago: false,
+    beneficios: 0, beneficiosPago: false,
+    fgts: 0, fgtsPago: false
+  },
+
+  "FUNAI RIO NEGRO": {
+    nota: 0, paga: false, pago: 0,
+    folha: 0, folhaPago: false,
+    beneficios: 0, beneficiosPago: false,
+    fgts: 0, fgtsPago: false
+  },
+
+  "FUNAI PARANÁ": {
+    nota: 0, paga: false, pago: 0,
+    folha: 0, folhaPago: false,
+    beneficios: 0, beneficiosPago: false,
+    fgts: 0, fgtsPago: false
+  },
+
+  "IFPI PIO IX": {
+    nota: 0, paga: false, pago: 0,
+    folha: 0, folhaPago: false,
+    beneficios: 0, beneficiosPago: false,
+    fgts: 0, fgtsPago: false
+  },
+
+  "IFIP OEIRAS": {
+    nota: 0, paga: false, pago: 0,
+    folha: 0, folhaPago: false,
+    beneficios: 0, beneficiosPago: false,
+    fgts: 0, fgtsPago: false
   }
 };
 
@@ -220,11 +297,27 @@ for (let nome in dados) {
     <div class="card">
       <h3 class="titulo">${nome}</h3>
 
-      <div class="linha"><span>Nota:</span><span>${formatar(d.nota)}</span></div>
+      <div class="linha">
+        <span>Nota:</span>
+        <span>${formatar(d.nota)} (${d.paga ? '<span class="status-pago">Paga</span>' : '<span class="status-nao">Não paga</span>'})</span>
+      </div>
+
       <div class="linha"><span>Valor Pago:</span><span>${formatar(d.pago)}</span></div>
-      <div class="linha"><span>Folha:</span><span>${formatar(d.folha)}</span></div>
-      <div class="linha"><span>VA/VT:</span><span>${formatar(d.beneficios)}</span></div>
-      <div class="linha"><span>FGTS:</span><span>${formatar(d.fgts)}</span></div>
+
+      <div class="linha">
+        <span>Folha:</span>
+        <span>${formatar(d.folha)} (${d.folhaPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+      </div>
+
+      <div class="linha">
+        <span>VA/VT:</span>
+        <span>${formatar(d.beneficios)} (${d.beneficiosPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+      </div>
+
+      <div class="linha">
+        <span>FGTS:</span>
+        <span>${formatar(d.fgts)} (${d.fgtsPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+      </div>
 
       <div class="linha">
         <span><strong>Resultado:</strong></span>
@@ -232,6 +325,7 @@ for (let nome in dados) {
           ${formatar(resultado)}
         </span>
       </div>
+
     </div>
   `;
 }
@@ -256,11 +350,16 @@ resumoDiv.innerHTML = `
 new Chart(document.getElementById("grafico"), {
   type: 'bar',
   data: {
-    labels: ['Notas','Recebido','Folha','VA/VT','FGTS','Resultado'],
+    labels: ['Notas', 'Recebido', 'Folha', 'VA/VT', 'FGTS', 'Resultado'],
     datasets: [{
-      data: [totalNota,totalPago,totalFolha,totalBeneficios,totalFgts,totalResultado],
+      label: 'Valores (R$)',
+      data: [totalNota, totalPago, totalFolha, totalBeneficios, totalFgts, totalResultado],
       backgroundColor: [
-        '#ff6600','#0bbf6a','#3b82f6','#a855f7','#f43f5e',
+        '#ff6600',
+        '#0bbf6a',
+        '#3b82f6',
+        '#a855f7',
+        '#f43f5e',
         totalResultado >= 0 ? '#0bbf6a' : '#ff3b3b'
       ],
       borderRadius: 10
@@ -280,5 +379,43 @@ new Chart(document.getElementById("grafico"), {
 });
 </script>
 
+ <div class="container">
+  <div class="card">
+    <h2 class="titulo">Backlog</h2>
+
+    <div class="tabela-wrapper">
+      <table class="tabela-backlog">
+        <thead>
+          <tr>
+            <th>Empresa</th>
+            <th>Faturamento Mensal</th>
+            <th>Backlog</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr><td>Copasa</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>FUNAI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>SAMAE</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>GHC</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>IFPI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>IPEM</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>ANVISA</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>IFRO</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>USP</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td>Total</td>
+            <td>R$ 0,00</td>
+            <td>R$ 0,00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+  
 </body>
 </html>
