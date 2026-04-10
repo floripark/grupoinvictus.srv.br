@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Intranet Invictus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<section class="contact">
+  <h2 class="section-title">Intranet Invictus</h2>
+
+  <div style="max-width:400px; margin:auto;">
+    <input type="password" id="codigo" placeholder="Digite o código de acesso">
+
+    <button onclick="verificar()">Entrar</button>
+  </div>
+</section>
+
+<script>
+function verificar() {
+  const codigo = document.getElementById("codigo").value;
+
+  if (codigo === "Rdn2026") {
+    localStorage.setItem("acesso", "ok");
+    window.location.href = "painel.html";
+  } else {
+    alert("Código incorreto");
+  }
+}
+</script>
+
+</body>
+</html>
