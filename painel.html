@@ -13,117 +13,54 @@ function formatar(valor) {
   });
 }
 
-// 📊 DADOS COMPLETOS
+// 📊 DADOS
 const dados = {
   "Copasa": {
-    nota: 15000, paga: true, pago: 15000,
-    folha: 8000, folhaPago: true,
-    beneficios: 2000, beneficiosPago: false,
-    fgts: 1200, fgtsPago: true
+    nota: 15000,
+    paga: true,
+    pago: 15000,
+    folha: 8000,
+    folhaPago: true,
+    beneficios: 2000,
+    beneficiosPago: false,
+    fgts: 1200,
+    fgtsPago: true
   },
-
   "GHC": {
-    nota: 20000, paga: false, pago: 0,
-    folha: 9000, folhaPago: false,
-    beneficios: 2500, beneficiosPago: false,
-    fgts: 1500, fgtsPago: false
+    nota: 20000,
+    paga: false,
+    pago: 0,
+    folha: 9000,
+    folhaPago: false,
+    beneficios: 2500,
+    beneficiosPago: false,
+    fgts: 1500,
+    fgtsPago: false
   },
-
   "SAMAE": {
-    nota: 20000, paga: false, pago: 0,
-    folha: 9000, folhaPago: false,
-    beneficios: 2500, beneficiosPago: false,
-    fgts: 1500, fgtsPago: false
-  },
-
-  "Funai Norte Limpeza": {
-    nota: 18000, paga: true, pago: 18000,
-    folha: 7000, folhaPago: true,
-    beneficios: 2200, beneficiosPago: false,
-    fgts: 1300, fgtsPago: true
-  },
-
-  "Funai Norte Adm": {
-    nota: 12000, paga: false, pago: 0,
-    folha: 5000, folhaPago: false,
-    beneficios: 1500, beneficiosPago: false,
-    fgts: 900, fgtsPago: false
-  },
-
-  "Funai Xingu": {
-    nota: 14000, paga: true, pago: 14000,
-    folha: 6000, folhaPago: true,
-    beneficios: 1800, beneficiosPago: true,
-    fgts: 1000, fgtsPago: true
-  },
-
-  "Funai Médio Purus": {
-    nota: 16000, paga: false, pago: 0,
-    folha: 6500, folhaPago: false,
-    beneficios: 2000, beneficiosPago: false,
-    fgts: 1100, fgtsPago: false
-  },
-
-  "Funai Alto Purus": {
-    nota: 17000, paga: true, pago: 17000,
-    folha: 7500, folhaPago: true,
-    beneficios: 2100, beneficiosPago: true,
-    fgts: 1200, fgtsPago: true
-  },
-
-  "FUNAI DOURADOS": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "FUNAI JURUÁ": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "FUNAI RIO NEGRO": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "FUNAI PARANÁ": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "IFPI PIO IX": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "IFIP OEIRAS": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
+    nota: 20000,
+    paga: false,
+    pago: 0,
+    folha: 9000,
+    folhaPago: false,
+    beneficios: 2500,
+    beneficiosPago: false,
+    fgts: 1500,
+    fgtsPago: false
   }
 };
 
 const contratosDiv = document.getElementById("contratos");
 const resumoDiv = document.getElementById("resumo");
 
+// 🔢 TOTAIS
 let totalNota = 0;
 let totalPago = 0;
 let totalFolha = 0;
 let totalBeneficios = 0;
 let totalFgts = 0;
 
-// CONTRATOS
+// 📌 CONTRATOS
 for (let nome in dados) {
   let d = dados[nome];
 
@@ -137,25 +74,44 @@ for (let nome in dados) {
     <div class="card">
       <h3 class="titulo">${nome}</h3>
 
-      <div class="linha"><span>Nota</span><span>${formatar(d.nota)}</span></div>
-      <div class="linha"><span>Pago</span><span>${formatar(d.pago)}</span></div>
-      <div class="linha"><span>Folha</span><span>${formatar(d.folha)}</span></div>
-      <div class="linha"><span>VA/VT</span><span>${formatar(d.beneficios)}</span></div>
-      <div class="linha"><span>FGTS</span><span>${formatar(d.fgts)}</span></div>
+      <div class="linha">
+        <span>Nota:</span>
+        <span>${formatar(d.nota)} (${d.paga ? '<span class="status-pago">Paga</span>' : '<span class="status-nao">Não paga</span>'})</span>
+      </div>
+
+      <div class="linha">
+        <span>Valor Pago:</span>
+        <span>${formatar(d.pago)}</span>
+      </div>
+
+      <div class="linha">
+        <span>Folha:</span>
+        <span>${formatar(d.folha)} (${d.folhaPago ? 'Pago' : 'Pendente'})</span>
+      </div>
+
+      <div class="linha">
+        <span>VA/VT:</span>
+        <span>${formatar(d.beneficios)} (${d.beneficiosPago ? 'Pago' : 'Pendente'})</span>
+      </div>
+
+      <div class="linha">
+        <span>FGTS:</span>
+        <span>${formatar(d.fgts)} (${d.fgtsPago ? 'Pago' : 'Pendente'})</span>
+      </div>
     </div>
   `;
 }
 
-// RESUMO
+// 📊 RESUMO
 resumoDiv.innerHTML = `
-  <div class="linha"><strong>Total Notas</strong><span>${formatar(totalNota)}</span></div>
-  <div class="linha"><strong>Total Recebido</strong><span>${formatar(totalPago)}</span></div>
-  <div class="linha"><strong>Total Folha</strong><span>${formatar(totalFolha)}</span></div>
-  <div class="linha"><strong>Total VA/VT</strong><span>${formatar(totalBeneficios)}</span></div>
-  <div class="linha"><strong>Total FGTS</strong><span>${formatar(totalFgts)}</span></div>
+  <div class="linha"><strong>Total Notas:</strong><span>${formatar(totalNota)}</span></div>
+  <div class="linha"><strong>Total Recebido:</strong><span>${formatar(totalPago)}</span></div>
+  <div class="linha"><strong>Total Folha:</strong><span>${formatar(totalFolha)}</span></div>
+  <div class="linha"><strong>Total VA/VT:</strong><span>${formatar(totalBeneficios)}</span></div>
+  <div class="linha"><strong>Total FGTS:</strong><span>${formatar(totalFgts)}</span></div>
 `;
 
-// GRÁFICO
+// 📈 GRÁFICO
 new Chart(document.getElementById("grafico"), {
   type: 'bar',
   data: {
