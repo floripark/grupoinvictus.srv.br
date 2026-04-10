@@ -13,6 +13,64 @@
   body {
     background: linear-gradient(135deg, #f4f6f9, #e9eef3);
   }
+    .tabela-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow-x: auto;
+  border-radius: 18px;
+}
+
+.tabela-backlog {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.tabela-backlog thead {
+  background: linear-gradient(135deg, #ff6600, #ff8533);
+}
+
+.tabela-backlog thead th {
+  color: white;
+  text-align: left;
+  padding: 16px 18px;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.tabela-backlog tbody tr {
+  border-bottom: 1px solid #f1f1f1;
+  transition: background 0.2s ease;
+}
+
+.tabela-backlog tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.tabela-backlog tbody tr:hover {
+  background: #fff3e6;
+}
+
+.tabela-backlog td {
+  padding: 14px 18px;
+  font-size: 15px;
+  color: #333;
+}
+
+.tabela-backlog tfoot tr {
+  background: #fff3e6;
+  border-top: 2px solid #ff6600;
+}
+
+.tabela-backlog tfoot td {
+  padding: 16px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+}
 
   .container {
     max-width: 1200px;
@@ -336,40 +394,37 @@ new Chart(document.getElementById("grafico"), {
   <div class="card">
     <h2 class="titulo">Backlog</h2>
 
-    <div style="max-width: 700px; margin: auto;">
-      <div class="tabela-wrapper">
-        <table class="tabela-backlog">
-          <thead>
-            <tr>
-              <th>Empresa</th>
-              <th>Faturamento Mensal</th>
-              <th>Backlog</th>
-            </tr>
-          </thead>
+    <div class="tabela-wrapper">
+      <table class="tabela-backlog">
+        <thead>
+          <tr>
+            <th>Empresa</th>
+            <th>Faturamento Mensal</th>
+            <th>Backlog</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            <tr><td>Copasa</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>FUNAI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>SAMAE</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>GHC</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>IFPI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>IPEM</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>ANVISA</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>IFRO</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-            <tr><td>USP</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          </tbody>
+        <tbody>
+          <tr><td>Copasa</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>FUNAI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>SAMAE</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>GHC</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>IFPI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>IPEM</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>ANVISA</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>IFRO</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+          <tr><td>USP</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        </tbody>
 
-          <tfoot>
-            <tr>
-              <td><strong>Total</strong></td>
-              <td>R$ 0,00</td>
-              <td>R$ 0,00</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+        <tfoot>
+          <tr>
+            <td>Total</td>
+            <td>R$ 0,00</td>
+            <td>R$ 0,00</td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
-
   </div>
 </div>
   
