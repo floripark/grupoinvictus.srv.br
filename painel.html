@@ -51,9 +51,10 @@
       gap: 20px;
     }
 
-    /* TABELA BACKLOG */
+    /* ===== BACKLOG COMPACTO ===== */
     .tabela-backlog {
-      width: 100%;
+      width: auto;
+      margin: 0 auto;
       border-collapse: collapse;
       font-size: 14px;
     }
@@ -61,25 +62,34 @@
     .tabela-backlog th {
       background: #d1d5db;
       border: 2px solid #000;
-      padding: 12px;
+      padding: 10px 14px;
       text-align: center;
+      white-space: nowrap;
     }
 
     .tabela-backlog td {
       border: 1px solid #000;
-      padding: 10px;
+      padding: 8px 14px;
+      white-space: nowrap;
+    }
+
+    .tabela-backlog td:first-child {
+      white-space: normal;
+      min-width: 260px;
     }
 
     .tabela-backlog td:nth-child(2),
     .tabela-backlog td:nth-child(3) {
       text-align: right;
       font-weight: bold;
+      min-width: 140px;
     }
 
     .tabela-backlog tfoot td {
       background: #d1d5db;
       border: 2px solid #000;
       font-weight: bold;
+      padding: 10px;
     }
   </style>
 </head>
@@ -112,8 +122,8 @@
       </thead>
 
       <tbody>
-        <tr><td>Copasa</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-        <tr><td>FUNAI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>Copasa - Companhia de Saneamento de Minas Gerais</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>FUNAI - Fundação Nacional dos Povos Indígenas</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
         <tr><td>SAMAE</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
         <tr><td>GHC</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
         <tr><td>IFPI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
@@ -151,8 +161,10 @@ function formatar(valor) {
   });
 }
 
-// DADOS
-const dados = { ...SEU BLOCO ATUAL AQUI... };
+// 📊 DADOS (MANTENHA OS SEUS AQUI)
+const dados = {
+  // COLE SEU BLOCO COMPLETO AQUI
+};
 
 const contratosDiv = document.getElementById("contratos");
 const resumoDiv = document.getElementById("resumo");
@@ -177,11 +189,30 @@ for (let nome in dados) {
     <div class="card">
       <h3 class="titulo">${nome}</h3>
 
-      <div class="linha"><span>Nota</span><span>${formatar(d.nota)}</span></div>
-      <div class="linha"><span>Pago</span><span>${formatar(d.pago)}</span></div>
-      <div class="linha"><span>Folha</span><span>${formatar(d.folha)}</span></div>
-      <div class="linha"><span>VA/VT</span><span>${formatar(d.beneficios)}</span></div>
-      <div class="linha"><span>FGTS</span><span>${formatar(d.fgts)}</span></div>
+      <div class="linha">
+        <span>Nota</span>
+        <span>${formatar(d.nota)}</span>
+      </div>
+
+      <div class="linha">
+        <span>Pago</span>
+        <span>${formatar(d.pago)}</span>
+      </div>
+
+      <div class="linha">
+        <span>Folha</span>
+        <span>${formatar(d.folha)}</span>
+      </div>
+
+      <div class="linha">
+        <span>VA/VT</span>
+        <span>${formatar(d.beneficios)}</span>
+      </div>
+
+      <div class="linha">
+        <span>FGTS</span>
+        <span>${formatar(d.fgts)}</span>
+      </div>
     </div>
   `;
 }
