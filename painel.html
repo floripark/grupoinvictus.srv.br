@@ -10,50 +10,77 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    body {
-      background: #f4f6f9;
-    }
+  body {
+    background: linear-gradient(135deg, #f4f6f9, #e9eef3);
+  }
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
 
-    .card {
-      background: #fff;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
+  .card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    transition: 0.3s;
+  }
 
-    .titulo {
-      color: #ff6600;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
+  .card:hover {
+    transform: translateY(-5px);
+  }
 
-    .linha {
-      display: flex;
-      justify-content: space-between;
-      margin: 8px 0;
-    }
+  .titulo {
+    color: #ff6600;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 20px;
+  }
 
-    .status-pago {
-      color: green;
-      font-weight: bold;
-    }
+  .linha {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    background: #f8f9fb;
+  }
 
-    .status-nao {
-      color: red;
-      font-weight: bold;
-    }
+  .linha span:last-child {
+    font-weight: 600;
+  }
 
-    canvas {
-      margin-top: 20px;
-    }
-  </style>
+  .status-pago {
+    color: #0bbf6a;
+    font-weight: bold;
+  }
+
+  .status-nao {
+    color: #ff3b3b;
+    font-weight: bold;
+  }
+
+  /* RESUMO DESTACADO */
+  #resumo .linha {
+    background: #fff3e6;
+    border-left: 5px solid #ff6600;
+  }
+
+  /* GRID DE CONTRATOS */
+  #contratos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  /* GRÁFICO */
+  canvas {
+    margin-top: 20px;
+  }
+</style>
 </head>
 
 <body>
