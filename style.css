@@ -609,3 +609,64 @@ footer {
   background: #163a63;
   transform: translateY(-2px);
 }
+
+.tabela-wrapper {
+  overflow-x: auto;
+  border-radius: 15px;
+}
+
+.tabela-backlog {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* CABEÇALHO */
+.tabela-backlog thead {
+  background: linear-gradient(135deg, #ff6600, #ff8533);
+  color: white;
+}
+
+.tabela-backlog th {
+  padding: 14px;
+  text-align: left;
+  font-weight: 600;
+}
+
+/* LINHAS */
+.tabela-backlog td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ZEBRA */
+.tabela-backlog tbody tr:nth-child(even) {
+  background: #f8f9fb;
+}
+
+/* HOVER */
+.tabela-backlog tbody tr:hover {
+  background: #fff3e6;
+  transition: 0.2s;
+}
+
+/* VALORES */
+.tabela-backlog td:nth-child(2),
+.tabela-backlog td:nth-child(3) {
+  font-weight: 600;
+  color: #333;
+}
+
+/* RODAPÉ */
+.tabela-backlog tfoot {
+  background: #f1f3f5;
+  font-weight: bold;
+}
+
+.tabela-backlog tfoot td {
+  padding: 14px;
+  border-top: 2px solid #ddd;
+}
