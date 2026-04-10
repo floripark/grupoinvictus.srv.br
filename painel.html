@@ -9,87 +9,130 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-  body {
-    background: linear-gradient(135deg, #f4f6f9, #e9eef3);
-  }
+    body {
+      background: linear-gradient(135deg, #f4f6f9, #e9eef3);
+    }
 
-  .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-  }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
 
-  .card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-    transition: 0.3s;
-  }
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
 
-  .card:hover {
-    transform: translateY(-5px);
-  }
+    .titulo {
+      color: #ff6600;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
 
-  .titulo {
-    color: #ff6600;
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 20px;
-  }
+    .linha {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background: #f8f9fb;
+      margin-bottom: 8px;
+      border-radius: 8px;
+    }
 
-  .linha {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
-    background: #f8f9fb;
-  }
+    .status-pago { color: green; font-weight: bold; }
+    .status-nao { color: red; font-weight: bold; }
 
-  .linha span:last-child {
-    font-weight: 600;
-  }
+    #contratos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
 
-  .status-pago {
-    color: #0bbf6a;
-    font-weight: bold;
-  }
+    /* TABELA BACKLOG */
+    .tabela-backlog {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
 
-  .status-nao {
-    color: #ff3b3b;
-    font-weight: bold;
-  }
+    .tabela-backlog th {
+      background: #d1d5db;
+      border: 2px solid #000;
+      padding: 12px;
+      text-align: center;
+    }
 
-  #resumo .linha {
-    background: #fff3e6;
-    border-left: 5px solid #ff6600;
-  }
+    .tabela-backlog td {
+      border: 1px solid #000;
+      padding: 10px;
+    }
 
-  #contratos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-  }
+    .tabela-backlog td:nth-child(2),
+    .tabela-backlog td:nth-child(3) {
+      text-align: right;
+      font-weight: bold;
+    }
 
-  canvas {
-    margin-top: 20px;
-  }
-</style>
+    .tabela-backlog tfoot td {
+      background: #d1d5db;
+      border: 2px solid #000;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="container">
 
+  <!-- RESUMO -->
   <div class="card">
     <h2 class="titulo">Resumo Geral</h2>
     <div id="resumo"></div>
     <canvas id="grafico"></canvas>
   </div>
 
+  <!-- CONTRATOS -->
   <div id="contratos"></div>
+
+  <!-- BACKLOG -->
+  <div class="card">
+    <h2 class="titulo">Backlog</h2>
+
+    <table class="tabela-backlog">
+      <thead>
+        <tr>
+          <th>EMPRESA</th>
+          <th>FATURAMENTO MENSAL</th>
+          <th>BACKLOG</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr><td>Copasa</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>FUNAI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>SAMAE</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>GHC</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>IFPI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>IPEM</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>ANVISA</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>IFRO</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+        <tr><td>USP</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td>TOTAL</td>
+          <td>R$ 0,00</td>
+          <td>R$ 0,00</td>
+        </tr>
+      </tfoot>
+    </table>
+
+  </div>
 
 </div>
 
@@ -100,7 +143,7 @@ if (localStorage.getItem("acesso") !== "ok") {
   window.location.href = "intranet.html";
 }
 
-// 💰 FUNÇÃO DE FORMATAÇÃO
+// FORMATAÇÃO
 function formatar(valor) {
   return valor.toLocaleString('pt-BR', {
     style: 'currency',
@@ -108,111 +151,12 @@ function formatar(valor) {
   });
 }
 
-// 📊 DADOS
-const dados = {
-  "Copasa": {
-    nota: 15000, paga: true, pago: 15000,
-    folha: 8000, folhaPago: true,
-    beneficios: 2000, beneficiosPago: false,
-    fgts: 1200, fgtsPago: true
-  },
-
-  "GHC": {
-    nota: 20000, paga: false, pago: 0,
-    folha: 9000, folhaPago: false,
-    beneficios: 2500, beneficiosPago: false,
-    fgts: 1500, fgtsPago: false
-  },
-
-  "SAMAE": {
-    nota: 20000, paga: false, pago: 0,
-    folha: 9000, folhaPago: false,
-    beneficios: 2500, beneficiosPago: false,
-    fgts: 1500, fgtsPago: false
-  },
-
-  "Funai Norte Limpeza": {
-    nota: 18000, paga: true, pago: 18000,
-    folha: 7000, folhaPago: true,
-    beneficios: 2200, beneficiosPago: false,
-    fgts: 1300, fgtsPago: true
-  },
-
-  "Funai Norte Adm": {
-    nota: 12000, paga: false, pago: 0,
-    folha: 5000, folhaPago: false,
-    beneficios: 1500, beneficiosPago: false,
-    fgts: 900, fgtsPago: false
-  },
-
-  "Funai Xingu": {
-    nota: 14000, paga: true, pago: 14000,
-    folha: 6000, folhaPago: true,
-    beneficios: 1800, beneficiosPago: true,
-    fgts: 1000, fgtsPago: true
-  },
-
-  "Funai Médio Purus": {
-    nota: 16000, paga: false, pago: 0,
-    folha: 6500, folhaPago: false,
-    beneficios: 2000, beneficiosPago: false,
-    fgts: 1100, fgtsPago: false
-  },
-
-  "Funai Alto Purus": {
-    nota: 17000, paga: true, pago: 17000,
-    folha: 7500, folhaPago: true,
-    beneficios: 2100, beneficiosPago: true,
-    fgts: 1200, fgtsPago: true
-  },
-
-  "FUNAI DOURADOS": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "FUNAI JURUÁ": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "FUNAI RIO NEGRO": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "FUNAI PARANÁ": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "IFPI PIO IX": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  },
-
-  "IFIP OEIRAS": {
-    nota: 0, paga: false, pago: 0,
-    folha: 0, folhaPago: false,
-    beneficios: 0, beneficiosPago: false,
-    fgts: 0, fgtsPago: false
-  }
-};
+// DADOS
+const dados = { ...SEU BLOCO ATUAL AQUI... };
 
 const contratosDiv = document.getElementById("contratos");
 const resumoDiv = document.getElementById("resumo");
 
-// TOTAIS
 let totalNota = 0;
 let totalPago = 0;
 let totalFolha = 0;
@@ -233,38 +177,22 @@ for (let nome in dados) {
     <div class="card">
       <h3 class="titulo">${nome}</h3>
 
-      <div class="linha">
-        <span>Nota:</span>
-        <span>${formatar(d.nota)} (${d.paga ? '<span class="status-pago">Paga</span>' : '<span class="status-nao">Não paga</span>'})</span>
-      </div>
-
-      <div class="linha"><span>Valor Pago:</span><span>${formatar(d.pago)}</span></div>
-
-      <div class="linha">
-        <span>Folha:</span>
-        <span>${formatar(d.folha)} (${d.folhaPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
-      </div>
-
-      <div class="linha">
-        <span>VA/VT:</span>
-        <span>${formatar(d.beneficios)} (${d.beneficiosPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
-      </div>
-
-      <div class="linha">
-        <span>FGTS:</span>
-        <span>${formatar(d.fgts)} (${d.fgtsPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
-      </div>
+      <div class="linha"><span>Nota</span><span>${formatar(d.nota)}</span></div>
+      <div class="linha"><span>Pago</span><span>${formatar(d.pago)}</span></div>
+      <div class="linha"><span>Folha</span><span>${formatar(d.folha)}</span></div>
+      <div class="linha"><span>VA/VT</span><span>${formatar(d.beneficios)}</span></div>
+      <div class="linha"><span>FGTS</span><span>${formatar(d.fgts)}</span></div>
     </div>
   `;
 }
 
 // RESUMO
 resumoDiv.innerHTML = `
-  <div class="linha"><strong>Total Notas:</strong><span>${formatar(totalNota)}</span></div>
-  <div class="linha"><strong>Total Recebido:</strong><span>${formatar(totalPago)}</span></div>
-  <div class="linha"><strong>Total Folha:</strong><span>${formatar(totalFolha)}</span></div>
-  <div class="linha"><strong>Total VA/VT:</strong><span>${formatar(totalBeneficios)}</span></div>
-  <div class="linha"><strong>Total FGTS:</strong><span>${formatar(totalFgts)}</span></div>
+  <div class="linha"><strong>Total Notas</strong><span>${formatar(totalNota)}</span></div>
+  <div class="linha"><strong>Total Recebido</strong><span>${formatar(totalPago)}</span></div>
+  <div class="linha"><strong>Total Folha</strong><span>${formatar(totalFolha)}</span></div>
+  <div class="linha"><strong>Total VA/VT</strong><span>${formatar(totalBeneficios)}</span></div>
+  <div class="linha"><strong>Total FGTS</strong><span>${formatar(totalFgts)}</span></div>
 `;
 
 // GRÁFICO
@@ -280,101 +208,6 @@ new Chart(document.getElementById("grafico"), {
 });
 
 </script>
-
-  <div class="container">
-  <div class="card">
-    <h2 class="titulo">Backlog</h2>
-
-    <table class="tabela-backlog">
-      <thead>
-        <tr>
-          <th>EMPRESA</th>
-          <th>FATURAMENTO MENSAL</th>
-          <th>BACKLOG</th>
-        </tr>
-      </thead>
-
-      <div class="container">
-  <div class="card">
-    <h2 class="titulo">Backlog</h2>
-
-    <div class="tabela-wrapper">
-      <table class="tabela-backlog">
-        <thead>
-          <tr>
-            <th>Empresa</th>
-            <th>Faturamento Mensal</th>
-            <th>Backlog</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Copasa</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>FUNAI</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>SAMAE</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>GHC</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>IFPI</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>IPEM</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>ANVISA</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>IFRO</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-
-          <tr>
-            <td>USP</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-        </tbody>
-
-        <tfoot>
-          <tr>
-            <td>Total</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
