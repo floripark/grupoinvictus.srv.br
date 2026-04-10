@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="style.css">
   <meta name="theme-color" content="#ff6600">
 
-  <!-- GRÁFICO -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
@@ -63,20 +62,17 @@
     font-weight: bold;
   }
 
-  /* RESUMO DESTACADO */
   #resumo .linha {
     background: #fff3e6;
     border-left: 5px solid #ff6600;
   }
 
-  /* GRID DE CONTRATOS */
   #contratos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
   }
 
-  /* GRÁFICO */
   canvas {
     margin-top: 20px;
   }
@@ -104,84 +100,57 @@ if (localStorage.getItem("acesso") !== "ok") {
   window.location.href = "intranet.html";
 }
 
-// 📊 DADOS (EDITÁVEL)
+// 💰 FUNÇÃO DE FORMATAÇÃO
+function formatar(valor) {
+  return valor.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  });
+}
+
+// 📊 DADOS
 const dados = {
   "Copasa": {
-    nota: 15000,
-    paga: true,
-    pago: 15000,
-    folha: 8000,
-    folhaPago: true,
-    beneficios: 2000,
-    beneficiosPago: false,
-    fgts: 1200,
-    fgtsPago: true
+    nota: 15000, paga: true, pago: 15000,
+    folha: 8000, folhaPago: true,
+    beneficios: 2000, beneficiosPago: false,
+    fgts: 1200, fgtsPago: true
   },
   "GHC": {
-    nota: 20000,
-    paga: false,
-    pago: 0,
-    folha: 9000,
-    folhaPago: false,
-    beneficios: 2500,
-    beneficiosPago: false,
-    fgts: 1500,
-    fgtsPago: false
+    nota: 20000, paga: false, pago: 0,
+    folha: 9000, folhaPago: false,
+    beneficios: 2500, beneficiosPago: false,
+    fgts: 1500, fgtsPago: false
   },
   "Funai Norte Limpeza": {
-    nota: 18000,
-    paga: true,
-    pago: 18000,
-    folha: 7000,
-    folhaPago: true,
-    beneficios: 2200,
-    beneficiosPago: false,
-    fgts: 1300,
-    fgtsPago: true
+    nota: 18000, paga: true, pago: 18000,
+    folha: 7000, folhaPago: true,
+    beneficios: 2200, beneficiosPago: false,
+    fgts: 1300, fgtsPago: true
   },
   "Funai Norte Adm": {
-    nota: 12000,
-    paga: false,
-    pago: 0,
-    folha: 5000,
-    folhaPago: false,
-    beneficios: 1500,
-    beneficiosPago: false,
-    fgts: 900,
-    fgtsPago: false
+    nota: 12000, paga: false, pago: 0,
+    folha: 5000, folhaPago: false,
+    beneficios: 1500, beneficiosPago: false,
+    fgts: 900, fgtsPago: false
   },
   "Funai Xingu": {
-    nota: 14000,
-    paga: true,
-    pago: 14000,
-    folha: 6000,
-    folhaPago: true,
-    beneficios: 1800,
-    beneficiosPago: true,
-    fgts: 1000,
-    fgtsPago: true
+    nota: 14000, paga: true, pago: 14000,
+    folha: 6000, folhaPago: true,
+    beneficios: 1800, beneficiosPago: true,
+    fgts: 1000, fgtsPago: true
   },
   "Funai Médio Purus": {
-    nota: 16000,
-    paga: false,
-    pago: 0,
-    folha: 6500,
-    folhaPago: false,
-    beneficios: 2000,
-    beneficiosPago: false,
-    fgts: 1100,
-    fgtsPago: false
+    nota: 16000, paga: false, pago: 0,
+    folha: 6500, folhaPago: false,
+    beneficios: 2000, beneficiosPago: false,
+    fgts: 1100, fgtsPago: false
   },
   "Funai Alto Purus": {
-    nota: 17000,
-    paga: true,
-    pago: 17000,
-    folha: 7500,
-    folhaPago: true,
-    beneficios: 2100,
-    beneficiosPago: true,
-    fgts: 1200,
-    fgtsPago: true
+    nota: 17000, paga: true, pago: 17000,
+    folha: 7500, folhaPago: true,
+    beneficios: 2100, beneficiosPago: true,
+    fgts: 1200, fgtsPago: true
   }
 };
 
@@ -211,24 +180,24 @@ for (let nome in dados) {
 
       <div class="linha">
         <span>Nota:</span>
-        <span>R$ ${d.nota} (${d.paga ? '<span class="status-pago">Paga</span>' : '<span class="status-nao">Não paga</span>'})</span>
+        <span>${formatar(d.nota)} (${d.paga ? '<span class="status-pago">Paga</span>' : '<span class="status-nao">Não paga</span>'})</span>
       </div>
 
-      <div class="linha"><span>Valor Pago:</span><span>R$ ${d.pago}</span></div>
+      <div class="linha"><span>Valor Pago:</span><span>${formatar(d.pago)}</span></div>
 
       <div class="linha">
         <span>Folha:</span>
-        <span>R$ ${d.folha} (${d.folhaPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+        <span>${formatar(d.folha)} (${d.folhaPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
       </div>
 
       <div class="linha">
         <span>VA/VT:</span>
-        <span>R$ ${d.beneficios} (${d.beneficiosPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+        <span>${formatar(d.beneficios)} (${d.beneficiosPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
       </div>
 
       <div class="linha">
         <span>FGTS:</span>
-        <span>R$ ${d.fgts} (${d.fgtsPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+        <span>${formatar(d.fgts)} (${d.fgtsPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
       </div>
     </div>
   `;
@@ -236,11 +205,11 @@ for (let nome in dados) {
 
 // RESUMO
 resumoDiv.innerHTML = `
-  <div class="linha"><strong>Total Notas:</strong><span>R$ ${totalNota}</span></div>
-  <div class="linha"><strong>Total Recebido:</strong><span>R$ ${totalPago}</span></div>
-  <div class="linha"><strong>Total Folha:</strong><span>R$ ${totalFolha}</span></div>
-  <div class="linha"><strong>Total VA/VT:</strong><span>R$ ${totalBeneficios}</span></div>
-  <div class="linha"><strong>Total FGTS:</strong><span>R$ ${totalFgts}</span></div>
+  <div class="linha"><strong>Total Notas:</strong><span>${formatar(totalNota)}</span></div>
+  <div class="linha"><strong>Total Recebido:</strong><span>${formatar(totalPago)}</span></div>
+  <div class="linha"><strong>Total Folha:</strong><span>${formatar(totalFolha)}</span></div>
+  <div class="linha"><strong>Total VA/VT:</strong><span>${formatar(totalBeneficios)}</span></div>
+  <div class="linha"><strong>Total FGTS:</strong><span>${formatar(totalFgts)}</span></div>
 `;
 
 // GRÁFICO
