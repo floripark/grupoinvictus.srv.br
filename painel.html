@@ -274,9 +274,43 @@ new Chart(document.getElementById("grafico"), {
   data: {
     labels: ['Notas', 'Recebido', 'Folha', 'VA/VT', 'FGTS'],
     datasets: [{
-      label: 'Valores',
-      data: [totalNota, totalPago, totalFolha, totalBeneficios, totalFgts]
+      label: 'Valores (R$)',
+      data: [totalNota, totalPago, totalFolha, totalBeneficios, totalFgts],
+      backgroundColor: [
+        '#ff6600',
+        '#0bbf6a',
+        '#3b82f6',
+        '#a855f7',
+        '#f43f5e'
+      ],
+      borderRadius: 10,
+      borderWidth: 1
     }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return 'R$ ' + context.raw.toLocaleString('pt-BR');
+          }
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value) {
+            return 'R$ ' + value.toLocaleString('pt-BR');
+          }
+        }
+      }
+    }
   }
 });
 
