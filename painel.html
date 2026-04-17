@@ -388,11 +388,18 @@ new Chart(document.getElementById("grafico"), {
     }]
   },
   options: {
+    layout: {
+  padding: {
+    top: 40
+  }
+},
     plugins: {
       legend: { display: false },
       datalabels: {
         anchor: 'end',
-        align: 'top',
+        align: 'end',
+          offset: 5,
+        
         formatter: v => 'R$ ' + v.toLocaleString('pt-BR')
       }
     }
