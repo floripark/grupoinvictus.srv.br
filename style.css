@@ -670,3 +670,7 @@ footer {
   padding: 14px;
   border-top: 2px solid #ddd;
 }
+.tabela-backlog th:nth-child(2),
+.tabela-backlog td:nth-child(2) {
+  text-align: center;
+}
