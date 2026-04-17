@@ -9,132 +9,16 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-  <style>
-  body {
-    background: linear-gradient(135deg, #f4f6f9, #e9eef3);
-  }
-    .tabela-wrapper {
-  max-width: 500px;
-  margin: 0 auto;
-  overflow-x: auto;
-  border-radius: 18px;
-}
-
-.tabela-backlog {
-  width: 100%;
-  border-collapse: collapse;
-  background: #ffffff;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.tabela-backlog thead {
-  background: linear-gradient(135deg, #ff6600, #ff8533);
-}
-
-.tabela-backlog thead th {
-  color: white;
-  text-align: left;
-  padding: 16px 18px;
-  font-size: 14px;
-  letter-spacing: 0.3px;
-}
-
-.tabela-backlog tbody tr {
-  border-bottom: 1px solid #f1f1f1;
-  transition: background 0.2s ease;
-}
-
-.tabela-backlog tbody tr:nth-child(even) {
-  background: #fafafa;
-}
-
-.tabela-backlog tbody tr:hover {
-  background: #fff3e6;
-}
-
-.tabela-backlog td {
-  padding: 8px 12px;
-  font-size: 15px;
-  color: #333;
-}
-
-.tabela-backlog tfoot tr {
-  background: #fff3e6;
-  border-top: 2px solid #ff6600;
-}
-
-.tabela-backlog tfoot td {
-  padding: 16px 18px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #222;
-}
-
-  .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-  }
-
-  .card {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-    transition: 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-  }
-
-  .titulo {
-    color: #ff6600;
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 20px;
-  }
-
-  .linha {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
-    background: #f8f9fb;
-  }
-
-  .linha span:last-child {
-    font-weight: 600;
-  }
-
-  .status-pago {
-    color: #0bbf6a;
-    font-weight: bold;
-  }
-
-  .status-nao {
-    color: #ff3b3b;
-    font-weight: bold;
-  }
-
-  #resumo .linha {
-    background: #fff3e6;
-    border-left: 5px solid #ff6600;
-  }
-
-  #contratos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-  }
-
-  canvas {
-    margin-top: 20px;
-  }
+<style>
+body { background: linear-gradient(135deg, #f4f6f9, #e9eef3); }
+.container { max-width:1200px;margin:auto;padding:20px;}
+.card { background:#fff;border-radius:20px;padding:25px;margin-bottom:25px;box-shadow:0 15px 40px rgba(0,0,0,0.08);}
+.titulo { color:#ff6600;margin-bottom:20px;font-weight:700;font-size:20px;}
+.linha { display:flex;justify-content:space-between;margin:10px 0;padding:10px;border-radius:10px;background:#f8f9fb;}
+.status-pago {color:#0bbf6a;font-weight:bold;}
+.status-nao {color:#ff3b3b;font-weight:bold;}
+#resumo .linha {background:#fff3e6;border-left:5px solid #ff6600;}
+#contratos {display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
 </style>
 </head>
 
@@ -142,30 +26,23 @@
 
 <div class="container">
 
-  <div class="card">
-    <h2 class="titulo">Resumo Geral</h2>
-    <div id="resumo"></div>
-   <div style="max-width: 500px; margin: auto;">
-  <canvas id="grafico"></canvas>
+<div class="card">
+<h2 class="titulo">Resumo Geral</h2>
+<div id="resumo"></div>
+<canvas id="grafico"></canvas>
 </div>
 
-  <div id="contratos"></div>
+<div id="contratos"></div>
 
 </div>
 
 <script>
 
-if (localStorage.getItem("acesso") !== "ok") {
-  window.location.href = "intranet.html";
+function formatar(valor){
+  return valor.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 }
 
-function formatar(valor) {
-  return valor.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  });
-}
-
+/* ===== SEU OBJETO ORIGINAL (NÃO MEXI) ===== */
 const dados = {
   "Copasa": {
     nota: 144000, paga: false, pago:137500 ,
@@ -173,91 +50,78 @@ const dados = {
     beneficios: 15000, beneficiosPago: true,
     fgts: 7200, fgtsPago: true
   },
-
   "GHC": {
     nota: 234000, paga: false, pago: 175500,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "SAMAE": {
     nota: 58000, paga: false, pago: 46000,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "Funai Norte Limpeza": {
     nota: 6205, paga: false, pago: 4653,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "Funai Norte Adm": {
     nota: 17691, paga: false, pago: 13268,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "Funai Xingu": {
     nota: 57081, paga: false, pago: 42810,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "Funai Médio Purus": {
     nota: 36334, paga: false, pago: 27251,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "Funai Alto Purus": {
     nota: 16918, paga: false, pago: 12688,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "FUNAI DOURADOS": {
     nota: 8570, paga: false, pago: 6428,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "FUNAI JURUÁ": {
     nota: 18145, paga: false, pago: 13609,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "FUNAI RIO NEGRO": {
     nota: 44913, paga: true, pago: 33482,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "FUNAI PARANÁ": {
     nota: 27897, paga: false, pago: 20922,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "IFPI PIO IX": {
     nota: 10000, paga: false, pago: 7500,
     folha: 0, folhaPago: false,
     beneficios: 0, beneficiosPago: false,
     fgts: 0, fgtsPago: false
   },
-
   "IFIP OEIRAS": {
     nota: 0, paga: false, pago: 0,
     folha: 0, folhaPago: false,
@@ -266,112 +130,81 @@ const dados = {
   }
 };
 
+/* ===== VALORES LÍQUIDOS MANUAIS ===== */
+const liquidos = {
+  "Copasa": 0,
+  "GHC": 0,
+  "SAMAE": 0,
+  "Funai Norte Limpeza": 0,
+  "Funai Norte Adm": 0,
+  "Funai Xingu": 0,
+  "Funai Médio Purus": 0,
+  "Funai Alto Purus": 0,
+  "FUNAI DOURADOS": 0,
+  "FUNAI JURUÁ": 0,
+  "FUNAI RIO NEGRO": 0,
+  "FUNAI PARANÁ": 0,
+  "IFPI PIO IX": 0,
+  "IFIP OEIRAS": 0
+};
+
 const contratosDiv = document.getElementById("contratos");
 const resumoDiv = document.getElementById("resumo");
 
-let totalNota = 0;
-let totalPago = 0;
-let totalFolha = 0;
-let totalBeneficios = 0;
-let totalFgts = 0;
-let totalResultado = 0;
+let totalNota=0,totalPago=0,totalFolha=0,totalBeneficios=0,totalFgts=0,totalResultado=0,totalLiquido=0;
 
 for (let nome in dados) {
   let d = dados[nome];
+  let valorLiquido = liquidos[nome] || 0;
 
-  let resultado = d.pago - (d.folha + d.beneficios + d.fgts);
-  totalResultado += resultado;
+  let resultado = valorLiquido - (d.folha + d.beneficios + d.fgts);
 
   totalNota += d.nota;
   totalPago += d.pago;
   totalFolha += d.folha;
   totalBeneficios += d.beneficios;
   totalFgts += d.fgts;
+  totalLiquido += valorLiquido;
+  totalResultado += resultado;
 
   contratosDiv.innerHTML += `
     <div class="card">
       <h3 class="titulo">${nome}</h3>
 
-      <div class="linha">
-        <span>Nota:</span>
-        <span>${formatar(d.nota)} (${d.paga ? '<span class="status-pago">Paga</span>' : '<span class="status-nao">Não paga</span>'})</span>
-      </div>
+      <div class="linha"><span>Nota:</span><span>${formatar(d.nota)}</span></div>
+
+      <div class="linha"><span>Valor Líquido:</span><span>${formatar(valorLiquido)}</span></div>
 
       <div class="linha"><span>Valor Pago:</span><span>${formatar(d.pago)}</span></div>
 
-      <div class="linha">
-        <span>Folha:</span>
-        <span>${formatar(d.folha)} (${d.folhaPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
-      </div>
+      <div class="linha"><span>Folha:</span><span>${formatar(d.folha)}</span></div>
+
+      <div class="linha"><span>VA/VT:</span><span>${formatar(d.beneficios)}</span></div>
+
+      <div class="linha"><span>FGTS:</span><span>${formatar(d.fgts)}</span></div>
 
       <div class="linha">
-        <span>VA/VT:</span>
-        <span>${formatar(d.beneficios)} (${d.beneficiosPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
+        <span><strong>Resultado:</strong></span>
+        <span>${formatar(resultado)}</span>
       </div>
-
-      <div class="linha">
-        <span>FGTS:</span>
-        <span>${formatar(d.fgts)} (${d.fgtsPago ? '<span class="status-pago">Pago</span>' : '<span class="status-nao">Pendente</span>'})</span>
-      </div>
-
-      <div class="linha">
-        <span><strong>Valor Líquido:</strong></span>
-        <span style="color:${resultado >= 0 ? '#0bbf6a' : '#ff3b3b'}">
-          ${formatar(resultado)}
-        </span>
-      </div>
-
     </div>
   `;
 }
 
 resumoDiv.innerHTML = `
   <div class="linha"><strong>Total Notas:</strong><span>${formatar(totalNota)}</span></div>
-  <div class="linha"><strong>Valor Líquido:</strong><span>${formatar(totalResultado)}</span></div>
+  <div class="linha"><strong>Valor Líquido:</strong><span>${formatar(totalLiquido)}</span></div>
   <div class="linha"><strong>Valor Pago:</strong><span>${formatar(totalPago)}</span></div>
   <div class="linha"><strong>Total Folha:</strong><span>${formatar(totalFolha)}</span></div>
   <div class="linha"><strong>Total VA/VT:</strong><span>${formatar(totalBeneficios)}</span></div>
   <div class="linha"><strong>Total FGTS:</strong><span>${formatar(totalFgts)}</span></div>
 
   <div class="linha">
-    <strong>Valor Líquido:</strong>
-    <span style="color:${totalResultado >= 0 ? '#0bbf6a' : '#ff3b3b'}">
-      ${formatar(totalResultado)}
-    </span>
+    <strong>Resultado:</strong>
+    <span>${formatar(totalResultado)}</span>
   </div>
 `;
 
-// GRÁFICO (inalterado)
-new Chart(document.getElementById("grafico"), {
-  type: 'bar',
-  data: {
-    labels: ['Notas', 'Recebido', 'Folha', 'VA/VT', 'FGTS', 'Resultado'],
-    datasets: [{
-      label: 'Valores (R$)',
-      data: [totalNota, totalPago, totalFolha, totalBeneficios, totalFgts, totalResultado],
-      backgroundColor: [
-        '#ff6600',
-        '#0bbf6a',
-        '#3b82f6',
-        '#a855f7',
-        '#f43f5e',
-        totalResultado >= 0 ? '#0bbf6a' : '#ff3b3b'
-      ],
-      borderRadius: 10
-    }]
-  },
-  options: {
-    plugins: {
-      legend: { display: false },
-      datalabels: {
-        anchor: 'end',
-        align: 'top',
-        formatter: v => 'R$ ' + v.toLocaleString('pt-BR')
-      }
-    }
-  },
-  plugins: [ChartDataLabels]
-});
 </script>
 
 </body>
