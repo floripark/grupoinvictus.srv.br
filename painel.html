@@ -155,12 +155,10 @@
 
 <script>
 
-// 🔐 PROTEÇÃO
 if (localStorage.getItem("acesso") !== "ok") {
   window.location.href = "intranet.html";
 }
 
-// 💰 FUNÇÃO DE FORMATAÇÃO
 function formatar(valor) {
   return valor.toLocaleString('pt-BR', {
     style: 'currency',
@@ -168,7 +166,6 @@ function formatar(valor) {
   });
 }
 
-// 📊 DADOS
 const dados = {
   "Copasa": {
     nota: 144000, paga: false, pago:137500 ,
@@ -272,7 +269,6 @@ const dados = {
 const contratosDiv = document.getElementById("contratos");
 const resumoDiv = document.getElementById("resumo");
 
-// TOTAIS
 let totalNota = 0;
 let totalPago = 0;
 let totalFolha = 0;
@@ -280,7 +276,6 @@ let totalBeneficios = 0;
 let totalFgts = 0;
 let totalResultado = 0;
 
-// CONTRATOS
 for (let nome in dados) {
   let d = dados[nome];
 
@@ -320,7 +315,7 @@ for (let nome in dados) {
       </div>
 
       <div class="linha">
-        <span><strong>Resultado:</strong></span>
+        <span><strong>Valor Líquido:</strong></span>
         <span style="color:${resultado >= 0 ? '#0bbf6a' : '#ff3b3b'}">
           ${formatar(resultado)}
         </span>
@@ -330,23 +325,23 @@ for (let nome in dados) {
   `;
 }
 
-// RESUMO
 resumoDiv.innerHTML = `
   <div class="linha"><strong>Total Notas:</strong><span>${formatar(totalNota)}</span></div>
-  <div class="linha"><strong>Total Recebido:</strong><span>${formatar(totalPago)}</span></div>
+  <div class="linha"><strong>Valor Líquido:</strong><span>${formatar(totalResultado)}</span></div>
+  <div class="linha"><strong>Valor Pago:</strong><span>${formatar(totalPago)}</span></div>
   <div class="linha"><strong>Total Folha:</strong><span>${formatar(totalFolha)}</span></div>
   <div class="linha"><strong>Total VA/VT:</strong><span>${formatar(totalBeneficios)}</span></div>
   <div class="linha"><strong>Total FGTS:</strong><span>${formatar(totalFgts)}</span></div>
 
   <div class="linha">
-    <strong>Resultado:</strong>
+    <strong>Valor Líquido:</strong>
     <span style="color:${totalResultado >= 0 ? '#0bbf6a' : '#ff3b3b'}">
       ${formatar(totalResultado)}
     </span>
   </div>
 `;
 
-// GRÁFICO
+// GRÁFICO (inalterado)
 new Chart(document.getElementById("grafico"), {
   type: 'bar',
   data: {
@@ -379,43 +374,5 @@ new Chart(document.getElementById("grafico"), {
 });
 </script>
 
- <div class="container">
-  <div class="card">
-    <h2 class="titulo">Backlog</h2>
-
-    <div class="tabela-wrapper">
-      <table class="tabela-backlog">
-        <thead>
-          <tr>
-            <th>Empresa</th>
-            <th>Faturamento Mensal</th>
-            <th>Backlog</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr><td>Copasa</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>FUNAI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>SAMAE</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>GHC</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>IFPI</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>IPEM</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>ANVISA</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>IFRO</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-          <tr><td>USP</td><td>R$ 0,00</td><td>R$ 0,00</td></tr>
-        </tbody>
-
-        <tfoot>
-          <tr>
-            <td>Total</td>
-            <td>R$ 0,00</td>
-            <td>R$ 0,00</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-</div>
-  
 </body>
 </html>
